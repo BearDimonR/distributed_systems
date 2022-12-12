@@ -1,0 +1,58 @@
+version: '3.4'
+services:
+    master:
+      image: mariadb:10.2
+      environment:
+        MYSQL_USER: user
+        MYSQL_PASSWORD: pass
+        MYSQL_ROOT_PASSWORD: pass
+        MYSQL_DATABASE: db
+      restart: on-failure
+      expose: 
+        - 3306
+      ports:
+        - '3306:3306'
+      volumes:
+      - ./data/master:/var/lib/mysql
+      - ./config/master:/etc/mysql/conf.d
+      - ./db:/docker-entrypoint-initdb.d/
+    second_master:
+      image: mariadb:10.2
+      environment:
+        MYSQL_USER: user
+        MYSQL_PASSWORD: pass
+        MYSQL_ROOT_PASSWORD: pass
+        MYSQL_DATABASE: db
+      restart: on-failure
+      expose: 
+        - 3306
+      ports:
+        - '3308:3306'
+      volumes:
+      - ./data/second_master:/var/lib/mysql
+      - ./config/second_master:/etc/mysql/conf.d
+      - ./db:/docker-entrypoint-initdb.d/
+    slave:
+      image: mariadb:10.2
+      environment:
+        MYSQL_USER: user
+        MYSQL_PASSWORD: pass
+        MYSQL_ROOT_PASSWORD: pass
+        MYSQL_DATABASE: db
+      restart: on-failure
+      expose: 
+        - 3306
+      ports:
+        - '3307:3306'
+      volumes:
+      - ./data/slave:/var/lib/mysql
+      - ./config/slave:/etc/mysql/conf.d
+      - ./db:/docker-entrypoint-initdb.d/
+    app:
+      build: app
+      environment:
+        MASTER_HOST: master
+        SECOND_MASTER_HOST: second_master
+        SLAVE_HOST: slave
+      ports:
+        - "8080:80"

@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+    master:
+      image: mariadb:10.2
+      environment:
+        MYSQL_ROOT_PASSWORD: pass
+      restart: on-failure
+      expose: 
+        - 3306
+      ports:
+        - '3306:3306'
+      volumes:
+      - ./data/master:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d/
+    app:
+      build: app
+      environment:
+        DATABASE_HOST: master:3306
+      ports:
+        - "8080:80"
