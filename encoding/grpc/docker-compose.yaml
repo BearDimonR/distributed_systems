@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+    backend:
+      build: backend
+      expose: 
+        - 50051
+      ports:
+        - 50051:50051
+    frontend:
+      build: frontend
+      expose:
+        - 3000
+      ports:
+        - 3000:3000
+    proxy:
+      build: proxy
+      expose:
+        - 9090
+        - 9901
+      ports:
+        - 9090:9090
+        - 9901:9901

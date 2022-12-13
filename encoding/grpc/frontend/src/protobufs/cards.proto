@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+message CardRequest {
+    int32 card_id = 1;
+}
+
+message CardResponse {
+    int32 card_id = 1;
+    string card_name = 2;
+    string brand = 3;
+    string type = 4;
+    double percentages = 5;
+    string picture_url = 6;
+    int32 likes = 7;
+    int32 dislikes = 8;
+}
+
+message ReactOnCardRequest {
+    int32 card_id = 1;
+    bool is_like = 2;
+}
+
+service Cards {
+    rpc GetCard (CardRequest) returns (CardResponse);
+    rpc ReactOnCard(ReactOnCardRequest) returns (CardResponse);
+}

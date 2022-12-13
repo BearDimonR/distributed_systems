@@ -1,0 +1,25 @@
+.flippyBackground {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 20px !important;
+}
+
+.card {
+  position: relative;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px !important;
+}
+
+.cardMedia {
+  object-fit: scale-down !important;
+}
+
+.card h3 {
+  position: absolute;
+  bottom: 0;
+  margin: 10px;
+  color: black;
+}
