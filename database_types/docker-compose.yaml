@@ -1,0 +1,48 @@
+version: '2.4'
+
+services:
+    # mysql:
+    #   image: mariadb:10.2
+    #   environment:
+    #     MYSQL_ROOT_PASSWORD: pass
+    #   restart: on-failure
+    #   expose: 
+    #     - 3306
+    #   ports:
+    #     - '3306:3306'
+    #   volumes:
+    #   - ./data/mysql:/var/lib/mysql
+    #   - ./db/mysql:/docker-entrypoint-initdb.d/
+    # mongodb:
+    #     image: mongo:latest
+    #     expose:
+    #       - 27017
+    #     ports:
+    #       - '27017:27017'
+    #     volumes:
+    #         - ./data/mongodb:/data/db
+    #         - ./db/mongodb:/docker-entrypoint-initdb.d/
+    #     environment:
+    #         MONGO_INITDB_ROOT_USERNAME: root
+    #         MONGO_INITDB_ROOT_PASSWORD: pass
+    neo4j:
+        image: neo4j:latest
+        expose:
+          - 7474   # HTTP API
+          - 7687   # BOLT API
+        ports:
+          - '7474:7474'
+          - '7687:7687'
+        environment:
+            NEO4J_AUTH: none
+        volumes:
+            - ./data/neo4j:/data:Z
+            - ./db/neo4j:/docker-entrypoint-initdb.d/
+    # app:
+    #   build: app
+    #   environment:
+    #     RELATIONAL_HOST: mysql
+    #     GRAPH_HOST: neo4j
+    #     DOC_HOST: mongo
+    #   ports:
+    #     - "8080:80"
