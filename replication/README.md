@@ -30,15 +30,6 @@ Output:
     Position: 725 (<master position>)
 ```
 
-CHANGE MASTER TO
-  MASTER_HOST='replication_second_master_1',
-  MASTER_USER='replication_user',
-  MASTER_PASSWORD='pass',
-  MASTER_PORT=3306,
-  MASTER_LOG_FILE='mysql-replication.000002',
-  MASTER_LOG_POS=697,
-  MASTER_CONNECT_RETRY=10;
-
 5. Update slave ```slave```
 ```
 mysql -u root -p

@@ -6,7 +6,7 @@ CREATE TABLE `user` (
 	`id` int(11) PRIMARY KEY NOT NULL,
 	login varchar(32) NOT NULL,
 	password varchar(16) NOT NULL
-) ;
+);
 
 
 CREATE TABLE `resume` (

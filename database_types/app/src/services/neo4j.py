@@ -45,5 +45,5 @@ class Neo4jService(base.BaseService):
             MATCH (f:user)-[:HAS_RESUME]-(a:resume),
             (a)-[:HAS_POSITION]-(b:position),
             (b)-[:FOR]-(e:company),
-            (b)-[:IN]-(c:city),
+            (b)-[:IN]-(c:city)
             RETURN DISTINCT e.name, f.login"""))
